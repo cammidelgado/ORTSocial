@@ -93,8 +93,8 @@ namespace ORTSocial.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdGrupoFamiliar"] = new SelectList(_context.GruposFamiliares, "IdGrupoFamiliar", "IdGrupoFamiliar", socio.IdGrupoFamiliar);
-            ViewData["IdPlan"] = new SelectList(_context.Planes, "IdPlan", "IdPlan", socio.IdPlan);
+            ViewData["IdGrupoFamiliar"] = new SelectList(_context.GruposFamiliares, "IdGrupoFamiliar", "Nombre", socio.IdGrupoFamiliar);
+            ViewData["IdPlan"] = new SelectList(_context.Planes, "IdPlan", "Nombre", socio.IdPlan);
             return View(socio);
         }
 
@@ -110,8 +110,8 @@ namespace ORTSocial.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+           // {
                 try
                 {
                     _context.Update(socio);
@@ -129,10 +129,10 @@ namespace ORTSocial.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
-            ViewData["IdGrupoFamiliar"] = new SelectList(_context.GruposFamiliares, "IdGrupoFamiliar", "IdGrupoFamiliar", socio.IdGrupoFamiliar);
-            ViewData["IdPlan"] = new SelectList(_context.Planes, "IdPlan", "IdPlan", socio.IdPlan);
-            return View(socio);
+           // }
+            //ViewData["IdGrupoFamiliar"] = new SelectList(_context.GruposFamiliares, "IdGrupoFamiliar", "IdGrupoFamiliar", socio.IdGrupoFamiliar);
+           //ViewData["IdPlan"] = new SelectList(_context.Planes, "IdPlan", "IdPlan", socio.IdPlan);
+           //return View(socio);
         }
 
         // GET: Socio/Delete/5
