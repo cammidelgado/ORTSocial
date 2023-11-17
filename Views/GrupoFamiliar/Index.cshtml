@@ -4,10 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Grupos Familiares</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Crear nuevo Grupo Familiar</a>
 </p>
 <table class="table">
     <thead>
@@ -31,9 +31,9 @@
                 @Html.DisplayFor(modelItem => item.Cantidad)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdGrupoFamiliar">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdGrupoFamiliar">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdGrupoFamiliar">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.IdGrupoFamiliar">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdGrupoFamiliar">Detalles</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdGrupoFamiliar">Borrar</a>
             </td>
         </tr>
 }
