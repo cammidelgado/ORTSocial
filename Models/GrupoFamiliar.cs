@@ -11,6 +11,6 @@ namespace ORTSocial.Models
         public string Nombre { get; set; }
 
         public int Cantidad { get; set; }
-        public virtual ICollection<Familiar> Familiares { get; set; }
+        public virtual ICollection<Familiar>? Familiares { get; set; }
     }
 }

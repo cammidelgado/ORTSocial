@@ -52,12 +52,6 @@ namespace ORTSocial.Controllers
             return View();
         }
 
-      /*  public async Task<Cartilla> GetCartilla(int idCartilla)
-        {
-            var cartilla = await _context.Cartillas.FirstOrDefaultAsync(cartilla => cartilla.IdCartilla == idCartilla);
-            return cartilla;
-        }*/
-
         // POST: Plan/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -65,17 +59,16 @@ namespace ORTSocial.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdPlan,Nombre,Costo,CantFamiliares,IdCartilla")] Plan plan)
         {
-          
-            if (ModelState.IsValid)
+
+          /*  if (ModelState.IsValid)
                 
-            {
+            {*/
                 _context.Add(plan);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            var errors = ModelState.Values.SelectMany(v => v.Errors);
-            ViewData["IdCartilla"] = new SelectList(_context.Cartillas, "IdCartilla", "IdCartilla", plan.IdCartilla);
-            return View(plan);
+           // }
+            //ViewData["IdCartilla"] = new SelectList(_context.Cartillas, "IdCartilla", "IdCartilla", plan.IdCartilla);
+            //return View(plan);
         }
 
         // GET: Plan/Edit/5

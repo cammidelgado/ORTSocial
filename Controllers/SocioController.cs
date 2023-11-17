@@ -49,8 +49,8 @@ namespace ORTSocial.Controllers
         // GET: Socio/Create
         public IActionResult Create()
         {
-            ViewData["IdGrupoFamiliar"] = new SelectList(_context.GruposFamiliares, "IdGrupoFamiliar", "IdGrupoFamiliar");
-            ViewData["IdPlan"] = new SelectList(_context.Planes, "IdPlan", "IdPlan");
+            ViewData["IdGrupoFamiliar"] = new SelectList(_context.GruposFamiliares, "IdGrupoFamiliar", "Nombre");
+            ViewData["IdPlan"] = new SelectList(_context.Planes, "IdPlan", "Nombre");
             return View();
         }
 
@@ -61,15 +61,23 @@ namespace ORTSocial.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdSocio,Dni,Nombre,Apellido,Email,Telefono,Provincia,Ciudad,IdPlan,IdGrupoFamiliar")] Socio socio)
         {
-            if (ModelState.IsValid)
-            {
+            var grupo = socio.IdGrupoFamiliar;
+            var idGrupo = await _context.GruposFamiliares.FirstOrDefaultAsync(idGrupo => idGrupo.IdGrupoFamiliar == grupo);
+            socio.GrupoFamiliar = idGrupo;
+
+            var plan = socio.IdPlan;
+            var idplan = await _context.Planes.FirstOrDefaultAsync(idplan => idplan.IdPlan == plan);
+            socio.Plan = idplan;
+            //if (ModelState.IsValid)
+            //{
                 _context.Add(socio);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            ViewData["IdGrupoFamiliar"] = new SelectList(_context.GruposFamiliares, "IdGrupoFamiliar", "IdGrupoFamiliar", socio.IdGrupoFamiliar);
-            ViewData["IdPlan"] = new SelectList(_context.Planes, "IdPlan", "IdPlan", socio.IdPlan);
-            return View(socio);
+            //}
+            
+           // ViewData["IdGrupoFamiliar"] = new SelectList(_context.GruposFamiliares, "IdGrupoFamiliar", "Nombre", socio.IdGrupoFamiliar);
+           // ViewData["IdPlan"] = new SelectList(_context.Planes, "IdPlan", "Nombre", socio.IdPlan);
+            //return View(socio);
         }
 
         // GET: Socio/Edit/5
