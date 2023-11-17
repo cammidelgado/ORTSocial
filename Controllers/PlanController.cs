@@ -48,9 +48,15 @@ namespace ORTSocial.Controllers
         // GET: Plan/Create
         public IActionResult Create()
         {
-            ViewData["IdCartilla"] = new SelectList(_context.Cartillas, "IdCartilla", "IdCartilla");
+            ViewData["IdCartilla"] = new SelectList(_context.Cartillas, "IdCartilla", "Nombre");
             return View();
         }
+
+      /*  public async Task<Cartilla> GetCartilla(int idCartilla)
+        {
+            var cartilla = await _context.Cartillas.FirstOrDefaultAsync(cartilla => cartilla.IdCartilla == idCartilla);
+            return cartilla;
+        }*/
 
         // POST: Plan/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -59,12 +65,15 @@ namespace ORTSocial.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdPlan,Nombre,Costo,CantFamiliares,IdCartilla")] Plan plan)
         {
+          
             if (ModelState.IsValid)
+                
             {
                 _context.Add(plan);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
             ViewData["IdCartilla"] = new SelectList(_context.Cartillas, "IdCartilla", "IdCartilla", plan.IdCartilla);
             return View(plan);
         }
