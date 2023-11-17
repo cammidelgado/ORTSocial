@@ -20,6 +20,7 @@ namespace ORTSocial.Models
         public int Telefono { get; set; }
         public string Provincia { get; set; }
         public string Ciudad { get; set; }
+        public ICollection<TurnoMedico>? TurnosMedicos { get; set; }
 
         [ForeignKey("Plan")]
         public int IdPlan { get; set; }

@@ -61,13 +61,11 @@ namespace ORTSocial.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdSocio,Dni,Nombre,Apellido,Email,Telefono,Provincia,Ciudad,IdPlan,IdGrupoFamiliar")] Socio socio)
         {
-            var grupo = socio.IdGrupoFamiliar;
-            var idGrupo = await _context.GruposFamiliares.FirstOrDefaultAsync(idGrupo => idGrupo.IdGrupoFamiliar == grupo);
-            socio.GrupoFamiliar = idGrupo;
-
-            var plan = socio.IdPlan;
-            var idplan = await _context.Planes.FirstOrDefaultAsync(idplan => idplan.IdPlan == plan);
-            socio.Plan = idplan;
+            Plan plan = await _context.Planes.FirstOrDefaultAsync(plan => plan.IdPlan == socio.IdPlan);
+            socio.Plan = plan;
+            GrupoFamiliar gr = await _context.GruposFamiliares.FirstOrDefaultAsync(gr => gr.IdGrupoFamiliar == socio.IdGrupoFamiliar);
+            socio.GrupoFamiliar = gr;
+          
             //if (ModelState.IsValid)
             //{
                 _context.Add(socio);
@@ -77,7 +75,7 @@ namespace ORTSocial.Controllers
             
            // ViewData["IdGrupoFamiliar"] = new SelectList(_context.GruposFamiliares, "IdGrupoFamiliar", "Nombre", socio.IdGrupoFamiliar);
            // ViewData["IdPlan"] = new SelectList(_context.Planes, "IdPlan", "Nombre", socio.IdPlan);
-            //return View(socio);
+           //return View(socio);
         }
 
         // GET: Socio/Edit/5

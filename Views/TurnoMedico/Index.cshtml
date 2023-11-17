@@ -31,10 +31,10 @@
                 @Html.DisplayFor(modelItem => item.Fecha)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Medico.IdMedico)
+                @Html.DisplayFor(modelItem => item.Medico.Especialidad)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Socio.IdSocio)
+                @Html.DisplayFor(modelItem => item.Socio.Dni)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.idTurno">Edit</a> |
