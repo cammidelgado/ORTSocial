@@ -88,7 +88,8 @@ namespace ORTSocial.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdGrupoFamiliar"] = new SelectList(_context.GruposFamiliares, "IdGrupoFamiliar", "IdGrupoFamiliar", familiar.IdGrupoFamiliar);
+            TempData["OldGrupoFamiliarId"] = familiar.IdGrupoFamiliar;
+            ViewData["IdGrupoFamiliar"] = new SelectList(_context.GruposFamiliares, "IdGrupoFamiliar", "Nombre", familiar.IdGrupoFamiliar);
             return View(familiar);
         }
 
@@ -108,6 +109,20 @@ namespace ORTSocial.Controllers
            // {
                 try
                 {
+                    var oldGrupoFamiliarId = (int)TempData["OldGrupoFamiliarId"];
+                    var oldGrupoFamiliar = await _context.GruposFamiliares.FindAsync(oldGrupoFamiliarId);
+                    if (oldGrupoFamiliar != null)
+                    {
+                        oldGrupoFamiliar.Cantidad--;
+                        _context.Update(oldGrupoFamiliar);
+                    }
+                    var newGrupoFamiliar = await _context.GruposFamiliares.FindAsync(familiar.IdGrupoFamiliar);
+                    if (newGrupoFamiliar != null)
+                    {
+                        newGrupoFamiliar.Cantidad++;
+                        _context.Update(newGrupoFamiliar);
+                    }
+
                     _context.Update(familiar);
                     await _context.SaveChangesAsync();
                 }
@@ -124,7 +139,7 @@ namespace ORTSocial.Controllers
                 }
                 return RedirectToAction(nameof(Index));
           //  }
-           // ViewData["IdGrupoFamiliar"] = new SelectList(_context.GruposFamiliares, "IdGrupoFamiliar", "IdGrupoFamiliar", familiar.IdGrupoFamiliar);
+           // ViewData["IdGrupoFamiliar"] = new SelectList(_context.GruposFamiliares, "IdGrupoFamiliar", "Nombre", familiar.IdGrupoFamiliar);
           //  return View(familiar);
         }
 
