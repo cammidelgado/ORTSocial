@@ -58,7 +58,7 @@ namespace ORTSocial.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdGrupoFamiliar,Nombre")] GrupoFamiliar grupoFamiliar)
         {
-            grupoFamiliar.Cantidad = 0;
+            grupoFamiliar.Cantidad = 1;
             if (ModelState.IsValid)
             {
                 _context.Add(grupoFamiliar);

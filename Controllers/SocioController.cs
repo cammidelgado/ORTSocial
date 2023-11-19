@@ -61,32 +61,37 @@ namespace ORTSocial.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdSocio,Dni,Nombre,Apellido,Email,Telefono,Provincia,Ciudad,IdPlan,IdGrupoFamiliar")] Socio socio, string nuevoGrupoFamiliarNombre)
         {
+            var grupoFamiliar1 = await _context.GruposFamiliares.FindAsync(socio.IdGrupoFamiliar);
+            var plan = await _context.Planes.FindAsync(socio.IdPlan);
+           // Plan plan = await _context.Planes.FirstOrDefaultAsync(p => p.IdPlan == socio.IdPlan);
+            //GrupoFamiliar grupoFamiliar = await _context.GruposFamiliares.FirstOrDefaultAsync(g => g.IdGrupoFamiliar == socio.IdGrupoFamiliar);
+            socio.Plan = plan;
+            socio.GrupoFamiliar = grupoFamiliar1;
 
             if (socio.IdGrupoFamiliar == 0)
             {
                 GrupoFamiliar nuevoGrupoFamiliar = new()
                 {
                     Nombre = nuevoGrupoFamiliarNombre,
-                    Cantidad = 0
+                    Cantidad = 1
                 };
                 _context.Add(nuevoGrupoFamiliar);
                 await _context.SaveChangesAsync();
                 socio.IdGrupoFamiliar = nuevoGrupoFamiliar.IdGrupoFamiliar;
+            } else
+            {
+                grupoFamiliar1.Cantidad++;
             }
-            Plan plan = await _context.Planes.FirstOrDefaultAsync(p => p.IdPlan == socio.IdPlan);
-            GrupoFamiliar grupoFamiliar = await _context.GruposFamiliares.FirstOrDefaultAsync(g => g.IdGrupoFamiliar == socio.IdGrupoFamiliar);
-            socio.Plan = plan;
-            socio.GrupoFamiliar = grupoFamiliar;
 
-           // if (ModelState.IsValid)
-            //{
+           //if (ModelState.IsValid)
+           //{
                 _context.Add(socio);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            //}
-           // ViewData["IdGrupoFamiliar"] = new SelectList(_context.GruposFamiliares, "IdGrupoFamiliar", "Nombre", socio.IdGrupoFamiliar);
-           // ViewData["IdPlan"] = new SelectList(_context.Planes, "IdPlan", "Nombre", socio.IdPlan);
-           // return View(socio);
+           // }
+          // ViewData["IdGrupoFamiliar"] = new SelectList(_context.GruposFamiliares, "IdGrupoFamiliar", "Nombre", socio.IdGrupoFamiliar);
+           //ViewData["IdPlan"] = new SelectList(_context.Planes, "IdPlan", "Nombre", socio.IdPlan);
+          // return View(socio);
         }
 
         // GET: Socio/Edit/5
