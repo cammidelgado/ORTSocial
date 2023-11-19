@@ -59,23 +59,34 @@ namespace ORTSocial.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdSocio,Dni,Nombre,Apellido,Email,Telefono,Provincia,Ciudad,IdPlan,IdGrupoFamiliar")] Socio socio)
+        public async Task<IActionResult> Create([Bind("IdSocio,Dni,Nombre,Apellido,Email,Telefono,Provincia,Ciudad,IdPlan,IdGrupoFamiliar")] Socio socio, string nuevoGrupoFamiliarNombre)
         {
-            Plan plan = await _context.Planes.FirstOrDefaultAsync(plan => plan.IdPlan == socio.IdPlan);
+
+            if (socio.IdGrupoFamiliar == 0)
+            {
+                GrupoFamiliar nuevoGrupoFamiliar = new()
+                {
+                    Nombre = nuevoGrupoFamiliarNombre,
+                    Cantidad = 0
+                };
+                _context.Add(nuevoGrupoFamiliar);
+                await _context.SaveChangesAsync();
+                socio.IdGrupoFamiliar = nuevoGrupoFamiliar.IdGrupoFamiliar;
+            }
+            Plan plan = await _context.Planes.FirstOrDefaultAsync(p => p.IdPlan == socio.IdPlan);
+            GrupoFamiliar grupoFamiliar = await _context.GruposFamiliares.FirstOrDefaultAsync(g => g.IdGrupoFamiliar == socio.IdGrupoFamiliar);
             socio.Plan = plan;
-            GrupoFamiliar gr = await _context.GruposFamiliares.FirstOrDefaultAsync(gr => gr.IdGrupoFamiliar == socio.IdGrupoFamiliar);
-            socio.GrupoFamiliar = gr;
-          
-            //if (ModelState.IsValid)
+            socio.GrupoFamiliar = grupoFamiliar;
+
+           // if (ModelState.IsValid)
             //{
                 _context.Add(socio);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             //}
-            
            // ViewData["IdGrupoFamiliar"] = new SelectList(_context.GruposFamiliares, "IdGrupoFamiliar", "Nombre", socio.IdGrupoFamiliar);
            // ViewData["IdPlan"] = new SelectList(_context.Planes, "IdPlan", "Nombre", socio.IdPlan);
-           //return View(socio);
+           // return View(socio);
         }
 
         // GET: Socio/Edit/5
