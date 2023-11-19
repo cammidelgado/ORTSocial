@@ -59,9 +59,15 @@ namespace ORTSocial.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdFamiliar,Dni,Nombre,Apellido,IdGrupoFamiliar")] Familiar familiar)
         {
+            var grupoFamiliar = await _context.GruposFamiliares.FindAsync(familiar.IdGrupoFamiliar);
+            if (grupoFamiliar != null)
+            {
+                grupoFamiliar.Cantidad++;
+                _context.Update(grupoFamiliar);
+            }
             //if (ModelState.IsValid)
             //{
-                _context.Add(familiar);
+            _context.Add(familiar);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             //}

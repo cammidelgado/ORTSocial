@@ -56,8 +56,9 @@ namespace ORTSocial.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdGrupoFamiliar,Nombre,Cantidad")] GrupoFamiliar grupoFamiliar)
+        public async Task<IActionResult> Create([Bind("IdGrupoFamiliar,Nombre")] GrupoFamiliar grupoFamiliar)
         {
+            grupoFamiliar.Cantidad = 0;
             if (ModelState.IsValid)
             {
                 _context.Add(grupoFamiliar);
