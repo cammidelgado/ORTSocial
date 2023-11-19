@@ -118,7 +118,17 @@ namespace ORTSocial.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdMedico"] = new SelectList(_context.Medicos, "IdMedico", "Especialidad", turnoMedico.IdMedico);
+            // ViewData["IdMedico"] = new SelectList(_context.Medicos, "IdMedico", "Especialidad", turnoMedico.IdMedico);
+            // ViewData["IdSocio"] = new SelectList(_context.Socios, "IdSocio", "Dni", turnoMedico.IdSocio);
+
+            var socio = await _context.Socios.Include(s => s.Plan).FirstOrDefaultAsync(s => s.IdSocio == turnoMedico.IdSocio);
+            var cartillaId = socio.Plan.IdCartilla;
+            var medicosEnCartilla = await _context.CartillasMedicos
+                .Where(cm => cm.IdCartilla == cartillaId)
+                .Select(cm => cm.Medico)
+                .ToListAsync();
+
+            ViewData["IdMedico"] = new SelectList(medicosEnCartilla, "IdMedico", "Especialidad", turnoMedico.IdMedico);
             ViewData["IdSocio"] = new SelectList(_context.Socios, "IdSocio", "Dni", turnoMedico.IdSocio);
             return View(turnoMedico);
         }
@@ -139,7 +149,16 @@ namespace ORTSocial.Controllers
             //{
                 try
                 {
-                    _context.Update(turnoMedico);
+                var socio = await _context.Socios.Include(s => s.Plan).FirstOrDefaultAsync(s => s.IdSocio == turnoMedico.IdSocio);
+                var cartillaId = socio.Plan.IdCartilla;
+
+                var medicosEnCartilla = await _context.CartillasMedicos
+                    .Where(cm => cm.IdCartilla == cartillaId)
+                    .Select(cm => cm.Medico)
+                    .ToListAsync();
+                ViewData["IdMedico"] = new SelectList(medicosEnCartilla, "IdMedico", "Especialidad", turnoMedico.IdMedico);
+
+                _context.Update(turnoMedico);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
