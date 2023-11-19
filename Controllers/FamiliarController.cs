@@ -159,6 +159,13 @@ namespace ORTSocial.Controllers
             var familiar = await _context.Familiares.FindAsync(id);
             if (familiar != null)
             {
+                var grupoFamiliar = await _context.GruposFamiliares.FindAsync(familiar.IdGrupoFamiliar);
+                if (grupoFamiliar != null)
+                {
+                    grupoFamiliar.Cantidad--;
+                    _context.Update(grupoFamiliar);
+                }
+
                 _context.Familiares.Remove(familiar);
             }
             
