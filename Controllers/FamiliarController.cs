@@ -48,7 +48,7 @@ namespace ORTSocial.Controllers
         // GET: Familiar/Create
         public IActionResult Create()
         {
-            ViewData["IdGrupoFamiliar"] = new SelectList(_context.GruposFamiliares, "IdGrupoFamiliar", "IdGrupoFamiliar");
+            ViewData["IdGrupoFamiliar"] = new SelectList(_context.GruposFamiliares, "IdGrupoFamiliar", "Nombre");
             return View();
         }
 
@@ -59,14 +59,14 @@ namespace ORTSocial.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdFamiliar,Dni,Nombre,Apellido,IdGrupoFamiliar")] Familiar familiar)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 _context.Add(familiar);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            ViewData["IdGrupoFamiliar"] = new SelectList(_context.GruposFamiliares, "IdGrupoFamiliar", "IdGrupoFamiliar", familiar.IdGrupoFamiliar);
-            return View(familiar);
+            //}
+           // ViewData["IdGrupoFamiliar"] = new SelectList(_context.GruposFamiliares, "IdGrupoFamiliar", "Nombre", familiar.IdGrupoFamiliar);
+           // return View(familiar);
         }
 
         // GET: Familiar/Edit/5
@@ -98,8 +98,8 @@ namespace ORTSocial.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+           // {
                 try
                 {
                     _context.Update(familiar);
@@ -117,9 +117,9 @@ namespace ORTSocial.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
-            ViewData["IdGrupoFamiliar"] = new SelectList(_context.GruposFamiliares, "IdGrupoFamiliar", "IdGrupoFamiliar", familiar.IdGrupoFamiliar);
-            return View(familiar);
+          //  }
+           // ViewData["IdGrupoFamiliar"] = new SelectList(_context.GruposFamiliares, "IdGrupoFamiliar", "IdGrupoFamiliar", familiar.IdGrupoFamiliar);
+          //  return View(familiar);
         }
 
         // GET: Familiar/Delete/5

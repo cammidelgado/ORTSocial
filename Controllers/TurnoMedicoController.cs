@@ -53,8 +53,8 @@ namespace ORTSocial.Controllers
         }
         public IActionResult Create()
         {
-            ViewData["IdMedico"] = new SelectList(_context.Medicos, "IdMedico", "Especialidad");
-            ViewData["IdSocio"] = new SelectList(_context.Socios, "IdSocio", "Dni");
+           ViewData["IdMedico"] = new SelectList(_context.Medicos, "IdMedico", "Especialidad");
+           ViewData["IdSocio"] = new SelectList(_context.Socios, "IdSocio", "Dni");
             return View();
         }
 
@@ -65,20 +65,44 @@ namespace ORTSocial.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("idTurno,Fecha,IdMedico,IdSocio")] TurnoMedico turnoMedico)
         {
-            Medico medico = await GetMedico(turnoMedico.IdMedico);
-            turnoMedico.Medico = medico;
-            Socio socio = await _context.Socios.FirstOrDefaultAsync(m => m.IdSocio == turnoMedico.IdSocio);
-            turnoMedico.Socio = socio;
+            /* Medico medico = await GetMedico(turnoMedico.IdMedico);
+             turnoMedico.Medico = medico;
+             Socio socio = await _context.Socios.FirstOrDefaultAsync(m => m.IdSocio == turnoMedico.IdSocio);
+             turnoMedico.Socio = socio;*/
 
-            if (ModelState.IsValid)
-           {
+           // if (ModelState.IsValid)
+           //{
                 _context.Add(turnoMedico);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["IdMedico"] = new SelectList(_context.Medicos, "IdMedico", "IdMedico", turnoMedico.IdMedico);
-            ViewData["IdSocio"] = new SelectList(_context.Socios, "IdSocio", "IdSocio", turnoMedico.IdSocio);
-            return View(turnoMedico);
+             return RedirectToAction(nameof(Index));
+            //}
+
+            //ViewData["IdMedico"] = new SelectList(_context.Medicos, "IdMedico", "Especialidad", turnoMedico.IdMedico);
+            //var medicosEnCartilla = await ObtenerMedicosPorCartillaAsync(turnoMedico.IdSocio);
+           // ViewData["IdMedico"] = new SelectList(medicosEnCartilla, "IdMedico", "Especialidad", turnoMedico.IdMedico);
+
+            //return View(turnoMedico);
+        }
+
+        [HttpGet]
+        public JsonResult GetMedicosBySocio(int idSocio)
+        {
+            var medicosEnCartilla = ObtenerMedicosPorCartillaAsync(idSocio).Result;
+
+            return Json(medicosEnCartilla.Select(m => new { value = m.IdMedico, especialidad = m.Especialidad }));
+        }
+
+        private async Task<List<Medico>> ObtenerMedicosPorCartillaAsync(int idSocio)
+        {
+            var socio = await _context.Socios.Include(s => s.Plan).FirstOrDefaultAsync(s => s.IdSocio == idSocio);
+            var cartillaId = socio.Plan.IdCartilla;
+
+            var medicosEnCartilla = await _context.CartillasMedicos
+                .Where(cm => cm.IdCartilla == cartillaId)
+                .Select(cm => cm.Medico)
+                .ToListAsync();
+
+            return medicosEnCartilla;
         }
 
         // GET: TurnoMedico/Edit/5
@@ -111,8 +135,8 @@ namespace ORTSocial.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 try
                 {
                     _context.Update(turnoMedico);
@@ -130,10 +154,10 @@ namespace ORTSocial.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
-            ViewData["IdMedico"] = new SelectList(_context.Medicos, "IdMedico", "Especialidad", turnoMedico.IdMedico);
-            ViewData["IdSocio"] = new SelectList(_context.Socios, "IdSocio", "Dni", turnoMedico.IdSocio);
-            return View(turnoMedico);
+           // }
+           // ViewData["IdMedico"] = new SelectList(_context.Medicos, "IdMedico", "Especialidad", turnoMedico.IdMedico);
+           // ViewData["IdSocio"] = new SelectList(_context.Socios, "IdSocio", "Dni", turnoMedico.IdSocio);
+           // return View(turnoMedico);
         }
 
         // GET: TurnoMedico/Delete/5

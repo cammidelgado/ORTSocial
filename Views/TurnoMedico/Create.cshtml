@@ -18,12 +18,12 @@
                 <span asp-validation-for="Fecha" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdMedico" class="control-label"></label>
-                <select asp-for="IdMedico" class ="form-control" asp-items="ViewBag.IdMedico"></select>
+                <label asp-for="IdSocio" class="control-label"></label>
+                <select asp-for="IdSocio" class="form-control" asp-items="ViewBag.IdSocio"></select>
             </div>
             <div class="form-group">
-                <label asp-for="IdSocio" class="control-label"></label>
-                <select asp-for="IdSocio" class ="form-control" asp-items="ViewBag.IdSocio"></select>
+                <label asp-for="IdMedico" class="control-label"></label>
+                <select asp-for="IdMedico" class ="form-control" asp-items="ViewBag.IdMedico"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -31,6 +31,26 @@
         </form>
     </div>
 </div>
+
+<script>
+    document.getElementById("IdSocio").addEventListener("change", function () {
+        var selectedSocioId = this.value;
+        $.ajax({
+            url: "/TurnoMedico/GetMedicosBySocio",
+            type: "GET",
+            data: { idSocio: selectedSocioId },
+            success: function (data) {
+                $("#IdMedico").empty();
+                $.each(data, function (index, item) {
+                    $("#IdMedico").append($('<option>', {
+                        value: item.value,
+                        text: item.especialidad
+                    }));
+                });
+            }
+        });
+    });
+</script>
 
 <div>
     <a asp-action="Index">Volver a la lista</a>
