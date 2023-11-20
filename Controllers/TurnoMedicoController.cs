@@ -89,7 +89,7 @@ namespace ORTSocial.Controllers
         {
             var medicosEnCartilla = ObtenerMedicosPorCartillaAsync(idSocio).Result;
 
-            return Json(medicosEnCartilla.Select(m => new { value = m.IdMedico, especialidad = m.Especialidad }));
+            return Json(medicosEnCartilla.Select(m => new { value = m.IdMedico, especialidad = m.Especialidad.ToString() }));
         }
 
         private async Task<List<Medico>> ObtenerMedicosPorCartillaAsync(int idSocio)
