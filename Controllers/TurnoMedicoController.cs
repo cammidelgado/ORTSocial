@@ -53,7 +53,7 @@ namespace ORTSocial.Controllers
         }
         public IActionResult Create()
         {
-           ViewData["IdMedico"] = new SelectList(_context.Medicos, "IdMedico", "Especialidad");
+          // ViewData["IdMedico"] = new SelectList(_context.Medicos, "IdMedico", "Especialidad");
            ViewData["IdSocio"] = new SelectList(_context.Socios, "IdSocio", "Dni");
             return View();
         }
