@@ -107,6 +107,7 @@ namespace ORTSocial.Controllers
             {
                 return NotFound();
             }
+            TempData["OldGrupoFamiliarId"] = socio.IdGrupoFamiliar;
             ViewData["IdGrupoFamiliar"] = new SelectList(_context.GruposFamiliares, "IdGrupoFamiliar", "Nombre", socio.IdGrupoFamiliar);
             ViewData["IdPlan"] = new SelectList(_context.Planes, "IdPlan", "Nombre", socio.IdPlan);
             return View(socio);
@@ -128,7 +129,20 @@ namespace ORTSocial.Controllers
            // {
                 try
                 {
-                    _context.Update(socio);
+                    var oldGrupoFamiliarId = (int)TempData["OldGrupoFamiliarId"];
+                    var oldGrupoFamiliar = await _context.GruposFamiliares.FindAsync(oldGrupoFamiliarId);
+                    if (oldGrupoFamiliar != null)
+                    {
+                         oldGrupoFamiliar.Cantidad--;
+                         _context.Update(oldGrupoFamiliar);
+                    }
+                     var newGrupoFamiliar = await _context.GruposFamiliares.FindAsync(socio.IdGrupoFamiliar);
+                    if (newGrupoFamiliar != null)
+                    {
+                        newGrupoFamiliar.Cantidad++;
+                        _context.Update(newGrupoFamiliar);
+                    }
+                _context.Update(socio);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -181,6 +195,12 @@ namespace ORTSocial.Controllers
             var socio = await _context.Socios.FindAsync(id);
             if (socio != null)
             {
+                var grupoFamiliar = await _context.GruposFamiliares.FindAsync(socio.IdGrupoFamiliar);
+                if (grupoFamiliar != null)
+                {
+                    grupoFamiliar.Cantidad--;
+                    _context.Update(grupoFamiliar);
+                }
                 _context.Socios.Remove(socio);
             }
             
