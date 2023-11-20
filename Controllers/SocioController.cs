@@ -118,7 +118,7 @@ namespace ORTSocial.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdSocio,Dni,Nombre,Apellido,Email,Telefono,Provincia,Ciudad,IdPlan,IdGrupoFamiliar")] Socio socio)
+        public async Task<IActionResult> Edit(int id, [Bind("IdSocio,Dni,Nombre,Apellido,Email,Telefono,Provincia,Ciudad,IdPlan,IdGrupoFamiliar")] Socio socio, string nuevoGrupoFamiliarNombre)
         {
             if (id != socio.IdSocio)
             {
@@ -136,13 +136,29 @@ namespace ORTSocial.Controllers
                          oldGrupoFamiliar.Cantidad--;
                          _context.Update(oldGrupoFamiliar);
                     }
-                     var newGrupoFamiliar = await _context.GruposFamiliares.FindAsync(socio.IdGrupoFamiliar);
-                    if (newGrupoFamiliar != null)
+                    if (socio.IdGrupoFamiliar == 0)
                     {
-                        newGrupoFamiliar.Cantidad++;
-                        _context.Update(newGrupoFamiliar);
+                        GrupoFamiliar nuevoGrupoFamiliar = new()
+                        {
+                            Nombre = nuevoGrupoFamiliarNombre,
+                            Cantidad = 1
+                        };
+
+                        _context.Add(nuevoGrupoFamiliar);
+                        await _context.SaveChangesAsync();
+
+                        socio.IdGrupoFamiliar = nuevoGrupoFamiliar.IdGrupoFamiliar;
                     }
-                _context.Update(socio);
+                    else
+                    {
+                        var newGrupoFamiliar = await _context.GruposFamiliares.FindAsync(socio.IdGrupoFamiliar);
+                        if (newGrupoFamiliar != null)
+                        {
+                            newGrupoFamiliar.Cantidad++;
+                            _context.Update(newGrupoFamiliar);
+                        }
+                    }
+                    _context.Update(socio);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

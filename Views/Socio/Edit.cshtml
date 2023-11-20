@@ -55,8 +55,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="IdGrupoFamiliar" class="control-label"></label>
-                <select asp-for="IdGrupoFamiliar" class="form-control" asp-items="ViewBag.IdGrupoFamiliar"></select>
+                <select asp-for="IdGrupoFamiliar" class="form-control" asp-items="ViewBag.IdGrupoFamiliar">
+                    <option value="0">Crear Nuevo Grupo Familiar</option>
+                </select>
                 <span asp-validation-for="IdGrupoFamiliar" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="nuevoGrupoFamiliarDiv" style="display:none;">
+                <label for="nuevoGrupoFamiliarNombre">Nombre del Nuevo Grupo Familiar:</label>
+                <input type="text" id="nuevoGrupoFamiliarNombre" name="nuevoGrupoFamiliarNombre" class="form-control" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -64,6 +70,12 @@
         </form>
     </div>
 </div>
+<script>
+    document.getElementById('IdGrupoFamiliar').addEventListener('change', function () {
+        var nuevoGrupoFamiliarDiv = document.getElementById('nuevoGrupoFamiliarDiv');
+        nuevoGrupoFamiliarDiv.style.display = (this.value === '0') ? 'block' : 'none';
+    });
+</script>
 
 <div>
     <a asp-action="Index">Volver a la lista</a>
