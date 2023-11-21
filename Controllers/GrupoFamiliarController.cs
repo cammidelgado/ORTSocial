@@ -76,7 +76,7 @@ namespace ORTSocial.Controllers
                 return NotFound();
             }
 
-            var grupoFamiliar = await _context.GruposFamiliares.FindAsync(id);
+            var grupoFamiliar = await _context.GruposFamiliares.AsNoTracking().FirstOrDefaultAsync(g => g.IdGrupoFamiliar == id);
             if (grupoFamiliar == null)
             {
                 return NotFound();
@@ -100,6 +100,8 @@ namespace ORTSocial.Controllers
             {
                 try
                 {
+                    var existingGrupoFamiliar = await _context.GruposFamiliares.AsNoTracking().FirstOrDefaultAsync(g => g.IdGrupoFamiliar == grupoFamiliar.IdGrupoFamiliar);
+                    grupoFamiliar.Cantidad = existingGrupoFamiliar.Cantidad;
                     _context.Update(grupoFamiliar);
                     await _context.SaveChangesAsync();
                 }
