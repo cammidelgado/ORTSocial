@@ -4,33 +4,36 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Crear</h1>
+<h1 class="text-center mt-5">Crear Turno Medico</h1>
 
-<h4>Turno Médico</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Fecha" class="control-label"></label>
-                <input asp-for="Fecha" class="form-control" />
-                <span asp-validation-for="Fecha" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdSocio" class="control-label"></label>
-                <select asp-for="IdSocio" class="form-control" asp-items="ViewBag.IdSocio">
-                    <option value="0">Elija un Socio</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdMedico" class="control-label"></label>
-                <select asp-for="IdMedico" class ="form-control" asp-items="ViewBag.IdMedico"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group mb-3">
+                    <label asp-for="Fecha" class="control-label"></label>
+                    <input asp-for="Fecha" class="form-control" />
+                    <span asp-validation-for="Fecha" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="IdSocio" class="control-label"></label>
+                    <select asp-for="IdSocio" class="form-control" asp-items="ViewBag.IdSocio">
+                        <option value="0">Elija un Socio</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdMedico" class="control-label"></label>
+                    <select asp-for="IdMedico" class ="form-control" asp-items="ViewBag.IdMedico"></select>
+                </div>
+                <div class="d-flex justify-content-between mt-40">
+                    <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+                    <input type="submit" value="Crear" class="btn btn-primary rounded" />
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
@@ -53,10 +56,6 @@
         });
     });
 </script>
-
-<div>
-    <a asp-action="Index">Volver a la lista</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
