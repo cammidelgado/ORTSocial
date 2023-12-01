@@ -21,3 +21,11 @@ body {
 .mt-40 {
     margin-top: 40px;
 }
+
+.mr-200 {
+    margin-right: 200px;
+}
+
+.ml-200 {
+    margin-left: 200px;
+}

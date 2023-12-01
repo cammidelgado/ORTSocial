@@ -4,72 +4,89 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Borrar</h1>
+<h1 class="text-center mt-5">Borrar Socio</h1>
+<hr />
 
-<h3>¿Estás seguro que quieres borrar esto?</h3>
-<div>
-    <h4>Socio</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Dni)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Dni)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Apellido)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Apellido)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefono)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Telefono)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Provincia)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Provincia)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Ciudad)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Ciudad)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Plan)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Plan.IdPlan)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.GrupoFamiliar)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.GrupoFamiliar.Nombre)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="IdSocio" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Volver a la lista</a>
-    </form>
+<div class="container mt-5">
+    <div class="d-flex flex-column align-items-between justify-content-between vh-80">
+        <div class="row">
+            <dt class="col-sm-6">
+                @Html.DisplayNameFor(model => model.Dni)
+            </dt>
+            <dd class="col-sm-6">
+                @Html.DisplayFor(model => model.Dni)
+            </dd>
+        </div>
+        <div class="row">
+            <dt class="col-sm-6">
+                @Html.DisplayNameFor(model => model.Nombre)
+            </dt>
+            <dd class="col-sm-6">
+                @Html.DisplayFor(model => model.Nombre)
+            </dd>
+        </div>
+        <div class="row">
+            <dt class="col-sm-6">
+                @Html.DisplayNameFor(model => model.Apellido)
+            </dt>
+            <dd class="col-sm-6">
+                @Html.DisplayFor(model => model.Apellido)
+            </dd>
+        </div>
+        <div class="row">
+            <dt class="col-sm-6">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class="col-sm-6">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+        </div>
+        <div class="row">
+            <dt class="col-sm-6">
+                @Html.DisplayNameFor(model => model.Telefono)
+            </dt>
+            <dd class="col-sm-6">
+                @Html.DisplayFor(model => model.Telefono)
+            </dd>
+        </div>
+        <div class="row">
+            <dt class="col-sm-6">
+                @Html.DisplayNameFor(model => model.Provincia)
+            </dt>
+            <dd class="col-sm-6">
+                @Html.DisplayFor(model => model.Provincia)
+            </dd>
+        </div>
+        <div class="row">
+            <dt class="col-sm-6">
+                @Html.DisplayNameFor(model => model.Ciudad)
+            </dt>
+            <dd class="col-sm-6">
+                @Html.DisplayFor(model => model.Ciudad)
+            </dd>
+        </div>
+        <div class="row">
+            <dt class="col-sm-6">
+                @Html.DisplayNameFor(model => model.Plan)
+            </dt>
+            <dd class="col-sm-6">
+                @Html.DisplayFor(model => model.Plan.Nombre)
+            </dd>
+        </div>
+        <div class="row">
+            <dt class="col-sm-6">
+                @Html.DisplayNameFor(model => model.GrupoFamiliar)
+            </dt>
+            <dd class="col-sm-6">
+                @Html.DisplayFor(model => model.GrupoFamiliar.Nombre)
+            </dd>
+        </div>
+        <form asp-action="Delete">
+            <div class="d-flex justify-content-center mt-40">
+                <input type="hidden" asp-for="IdSocio" />
+                <a asp-action="Index" class="btn btn-secondary mr-200">Volver a la lista</a> |
+                <input type="submit" value="Borrar" class="btn btn-danger ml-200"/>
+            </div>
+        </form>
+    </div>
 </div>
