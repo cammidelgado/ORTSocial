@@ -3,51 +3,34 @@
 @{
     ViewData["Title"] = "Index";
 }
+<head>
+    <link rel="stylesheet" href="~/css/plan.css" />
+</head>
 
-<h1>Planes</h1>
+<div class="d-flex flex-column">
+    <div class="text-center">
+        <h1 class="">Planes</h1>
+    </div>
+</div>
 
-<p>
-    @*  <a asp-action="Create">Create New</a>*@
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Costo)
-            </th>
-           @* <th>
-                @Html.DisplayNameFor(model => model.CantFamiliares)
-            </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.Cartilla)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Costo)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.CantFamiliares)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.Cartilla.Nombre)
-            </td>
-            <td>
-               @* <a asp-action="Edit" asp-route-id="@item.IdPlan">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdPlan">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdPlan">Delete</a>*@
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </div>
+                <div class="card-body">
+                    <p>
+                        <span class="label">@Html.DisplayNameFor(model => model.Costo)</span>
+                    $@Html.DisplayFor(modelItem => item.Costo)</p>
+                    <p>
+                        <span class="label">@Html.DisplayNameFor(model => model.Cartilla)</span>
+                    @Html.DisplayFor(modelItem => item.Cartilla.Nombre)</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
