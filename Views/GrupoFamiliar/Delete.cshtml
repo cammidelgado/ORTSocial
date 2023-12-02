@@ -4,30 +4,38 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Borrar</h1>
+<h1 class="text-center mt-5">Borrar Grupo Familiar</h1>
+<hr />
 
-<div class="alert alert-danger" role="alert">¿Estás seguro que quieres borrar esto?</div>
-<div>
-    <h4>Grupo Familiar</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cantidad)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cantidad)
-        </dd>
-    </dl>
+
+<div class="container mt-5">
+    <div class="d-flex flex-column align-items-between justify-content-between vh-80">
+        <div class="alert alert-danger" role="alert">¿Estás seguro que quieres borrar esto?</div>
+        <div class="row">
+            <dt class="col-sm-6 pl-350">
+                @Html.DisplayNameFor(model => model.Nombre)
+            </dt>
+            <dd class="col-sm-6">
+                @Html.DisplayFor(model => model.Nombre)
+            </dd>
+        </div>
+        <div class="row">
+            <dt class="col-sm-6 pl-350">
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </dt>
+            <dd class="col-sm-6">
+                @Html.DisplayFor(model => model.Cantidad)
+            </dd>
+        </div>
+        <form asp-action="Delete">
+            <div class="d-flex justify-content-center mt-40">
+                <input type="hidden" asp-for="IdGrupoFamiliar" />
+                <a asp-action="Index" class="btn btn-secondary mr-200">Volver a la lista</a>
+                <input type="submit" value="Borrar" class="btn btn-danger ml-200" />
+                
+            </div>
+        </form>
+    </div>
     
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="IdGrupoFamiliar" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Volver a la lista</a>
-    </form>
+    
 </div>
