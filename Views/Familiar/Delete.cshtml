@@ -4,7 +4,7 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1 class="text-center mt-5">Eliminar Familiar</h1>
+<h1 class="text-center mt-5">Borrar Familiar</h1>
 
 
 <div class="container">
@@ -38,8 +38,8 @@
             <div class="d-flex justify-content-between mt-40">
                 <form asp-action="Delete">
                     <input type="hidden" asp-for="IdFamiliar" />
-                    <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
-                    <input type="submit" value="Delete" class="btn btn-danger" />
+                    <a asp-action="Index" class="btn btn-secondary mr-200">Volver a la lista</a>
+                    <input type="submit" value="Borrar" class="btn btn-danger ml-200" />
                 </form>
             </div>      
         </div>
