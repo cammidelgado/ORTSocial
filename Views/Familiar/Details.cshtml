@@ -9,38 +9,38 @@
 
 <div class="container mt-5">
     <div class="d-flex flex-column align-items-between justify-content-between vh-80">
-        <dl class="row">
+        <div class="row">
             <dt class="col-sm-6 pl-350">
                 @Html.DisplayNameFor(model => model.Dni)
             </dt>
             <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.Dni)
             </dd>
-        </dl>
-        <dl class="row">
+        </div>
+        <div class="row">
             <dt class="col-sm-6 pl-350">
                 @Html.DisplayNameFor(model => model.Nombre)
             </dt>
             <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.Nombre)
             </dd>
-        </dl>
-        <dl class="row">
+        </div>
+        <div class="row">
             <dt class="col-sm-6 pl-350">
                 @Html.DisplayNameFor(model => model.Apellido)
             </dt>
             <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.Apellido)
             </dd>
-        </dl>
-        <dl class="row">
+        </div>
+        <div class="row">
             <dt class="col-sm-6 pl-350">
                 @Html.DisplayNameFor(model => model.GrupoFamiliar)
             </dt>
             <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.GrupoFamiliar.Nombre)
             </dd>
-        </dl>
+        </div>
         <div class="d-flex justify-content-center mt-40">
             <a asp-action="Index" class="btn btn-secondary mr-200">Volver a la lista</a>
             <a asp-action="Edit" asp-route-id="@Model?.IdFamiliar" class="btn btn-warning ml-200">Editar</a>
