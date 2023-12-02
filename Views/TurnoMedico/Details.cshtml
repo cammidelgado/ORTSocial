@@ -4,33 +4,38 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Detalles</h1>
+<h1 class="text-center mt-5">Detalles Turno Medico</h1>
+<hr />
 
-<div>
-    <h4>Turno Médico</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Fecha)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Fecha)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Medico)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Medico.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Socio)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Socio.Nombre)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.idTurno">Editar</a> |
-    <a asp-action="Index">Volver a la lista</a>
+<div class="container mt-5">
+    <div class="d-flex flex-column align-items-between justify-content-between vh-80">
+        <div class="row">
+            <dt class="col-sm-6 pl-350">
+                @Html.DisplayNameFor(model => model.Fecha)
+            </dt>
+            <dd class = "col-sm-6">
+                @Html.DisplayFor(model => model.Fecha)
+            </dd>
+        </div>
+        <div class="row">
+            <dt class="col-sm-6 pl-350">
+                @Html.DisplayNameFor(model => model.Medico)
+            </dt>
+            <dd class = "col-sm-6">
+                @Html.DisplayFor(model => model.Medico.Nombre)
+            </dd>
+        </div>
+        <div class="row">
+            <dt class="col-sm-6 pl-350">
+                @Html.DisplayNameFor(model => model.Socio)
+            </dt>
+            <dd class = "col-sm-6">
+                @Html.DisplayFor(model => model.Socio.Nombre)
+            </dd>
+        </div>
+        <div class="d-flex justify-content-center mt-40">
+            <a asp-action="Index" class="btn btn-secondary mr-200">Volver a la lista</a> |
+            <a asp-action="Edit" asp-route-id="@Model?.idTurno" class="btn btn-warning ml-200">Editar</a>
+        </div>
+    </div>
 </div>

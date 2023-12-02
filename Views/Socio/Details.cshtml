@@ -9,7 +9,7 @@
 <div class="container mt-5">
     <div class="d-flex flex-column align-items-between justify-content-between vh-80">
         <div class="row">
-            <dt class="col-sm-6">
+            <dt class="col-sm-6 pl-350">
                 @Html.DisplayNameFor(model => model.Dni)
             </dt>
             <dd class="col-sm-6">
@@ -17,7 +17,7 @@
             </dd>
         </div>
         <div class="row">
-            <dt class="col-sm-6">
+            <dt class="col-sm-6 pl-350">
                 @Html.DisplayNameFor(model => model.Nombre)
             </dt>
             <dd class="col-sm-6">
@@ -25,7 +25,7 @@
             </dd>
         </div>
         <div class="row">
-            <dt class="col-sm-6">
+            <dt class="col-sm-6 pl-350">
                 @Html.DisplayNameFor(model => model.Apellido)
             </dt>
             <dd class="col-sm-6">
@@ -33,7 +33,7 @@
             </dd>
         </div>
         <div class="row">
-            <dt class="col-sm-6">
+            <dt class="col-sm-6 pl-350">
                 @Html.DisplayNameFor(model => model.Email)
             </dt>
             <dd class="col-sm-6">
@@ -41,7 +41,7 @@
             </dd>
         </div>
         <div class="row">
-            <dt class="col-sm-6">
+            <dt class="col-sm-6 pl-350">
                 @Html.DisplayNameFor(model => model.Telefono)
             </dt>
             <dd class="col-sm-6">
@@ -49,7 +49,7 @@
             </dd>
         </div>
         <div class="row">
-            <dt class="col-sm-6">
+            <dt class="col-sm-6 pl-350">
                 @Html.DisplayNameFor(model => model.Provincia)
             </dt>
             <dd class="col-sm-6">
@@ -57,7 +57,7 @@
             </dd>
         </div>
         <div class="row">
-            <dt class="col-sm-6">
+            <dt class="col-sm-6 pl-350">
                 @Html.DisplayNameFor(model => model.Ciudad)
             </dt>
             <dd class="col-sm-6">
@@ -65,7 +65,7 @@
             </dd>
         </div>
         <div class="row">
-            <dt class="col-sm-6">
+            <dt class="col-sm-6 pl-350">
                 @Html.DisplayNameFor(model => model.Plan)
             </dt>
             <dd class="col-sm-6">
@@ -73,17 +73,17 @@
             </dd>
         </div>
         <div class="row">
-            <dt class="col-sm-6">
+            <dt class="col-sm-6 pl-350">
                 @Html.DisplayNameFor(model => model.GrupoFamiliar)
             </dt>
             <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.GrupoFamiliar.Nombre)
             </dd>
         </div>
-            <div class="d-flex justify-content-center mt-40">
-                <a asp-action="Index" class="btn btn-secondary mr-200">Volver a la lista</a> |
-                <a asp-action="Edit" asp-route-id="@Model?.IdSocio" class="btn btn-warning ml-200">Editar</a>
-            </div>
+        <div class="d-flex justify-content-center mt-40">
+            <a asp-action="Index" class="btn btn-secondary mr-200">Volver a la lista</a> |
+            <a asp-action="Edit" asp-route-id="@Model?.IdSocio" class="btn btn-warning ml-200">Editar</a>
+        </div>
     </div>
 </div>
 

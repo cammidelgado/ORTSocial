@@ -4,36 +4,41 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Borrar</h1>
+<h1 class="text-center mt-5">Borrar Turno Medico</h1>
+<hr/>
 
-<h3>¿Estás seguro que quieres borrar esto?</h3>
-<div>
-    <h4>Turno Médico</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Fecha)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Fecha)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Medico)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Medico.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Socio)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Socio.Nombre)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="idTurno" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Volver a la lista</a>
-    </form>
+<div class="container mt-5">
+    <div class="d-flex flex-column align-items-between justify-content-between vh-80">
+        <div class="row">
+            <dt class="col-sm-6 pl-350">
+                @Html.DisplayNameFor(model => model.Fecha)
+            </dt>
+            <dd class="col-sm-6">
+                @Html.DisplayFor(model => model.Fecha)
+            </dd>
+        </div>
+        <div class="row">
+            <dt class="col-sm-6 pl-350">
+                @Html.DisplayNameFor(model => model.Medico)
+            </dt>
+            <dd class="col-sm-6">
+                @Html.DisplayFor(model => model.Medico.Nombre)
+            </dd>
+        </div>
+        <div class="row">
+            <dt class="col-sm-6 pl-350">
+                @Html.DisplayNameFor(model => model.Socio)
+            </dt>
+            <dd class="col-sm-6">
+                @Html.DisplayFor(model => model.Socio.Nombre)
+            </dd>
+        </div>
+        <form asp-action="Delete">
+            <div class="d-flex justify-content-center mt-40">
+                <input type="hidden" asp-for="idTurno" />
+                <a asp-action="Index" class="btn btn-secondary mr-200">Volver a la lista</a> |
+                <input type="submit" value="Borrar" class="btn btn-danger ml-200" />
+            </div>
+        </form>
+    </div>
 </div>

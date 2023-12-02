@@ -29,3 +29,11 @@ body {
 .ml-200 {
     margin-left: 200px;
 }
+
+.pr-350 {
+    padding-right: 350px;
+}
+
+.pl-350 {
+    padding-left: 350px;
+}
