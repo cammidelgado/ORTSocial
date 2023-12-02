@@ -4,38 +4,41 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Grupos Familiares</h1>
-@*
-<p>
-    <a asp-action="Create">Crear nuevo Grupo Familiar</a>
-</p>*@
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cantidad)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cantidad)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdGrupoFamiliar">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.IdGrupoFamiliar">Detalles</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdGrupoFamiliar">Borrar</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="d-flex flex-column">
+    <div class="text-center">
+        <h1 class="">Grupos Familiares</h1>
+    </div>
+</div>
+
+<div class="d-flex align-items-center justify-content-center vh-80">
+    <table class="table text-center">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cantidad)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+                <td>
+                   <a asp-action="Details" asp-route-id="@item.IdGrupoFamiliar" class="btn btn-outline-info">Detalles</a> |
+                   <a asp-action="Edit" asp-route-id="@item.IdGrupoFamiliar" class="btn btn-outline-warning">Editar</a> |
+                   <a asp-action="Delete" asp-route-id="@item.IdGrupoFamiliar" class="btn btn-outline-danger">Borrar</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+</div>
