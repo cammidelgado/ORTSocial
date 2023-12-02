@@ -5,43 +5,53 @@
 }
 
 <h1 class="text-center mt-5">Borrar Familiar</h1>
+<hr />
 
 
-<div class="container">
-    <div class="row justify-content-center mt-5">
-        <div class="col-md-6">
-            <div class="alert alert-danger" role="alert">¿Estás seguro que quieres borrar esto?</div>
-            <dt class = "">
+<div class="container mt-5">
+    <div class="d-flex flex-column align-items-between justify-content-between vh-80">
+        <div class="alert alert-danger" role="alert">¿Estás seguro que quieres borrar esto?</div>
+        <div class="row">
+            <dt class="col-sm-6 pl-350">
                 @Html.DisplayNameFor(model => model.Dni)
             </dt>
-            <dd class = "">
+            <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.Dni)
             </dd>
-            <dt class = "col-sm-2">
+        </div>
+        <div class="row">
+            <dt class="col-sm-6 pl-350">
                 @Html.DisplayNameFor(model => model.Nombre)
             </dt>
-            <dd class = "col-sm-10">
+            <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.Nombre)
             </dd>
-            <dt class = "col-sm-2">
+        </div>
+        <div class="row">
+            <dt class="col-sm-6 pl-350">
                 @Html.DisplayNameFor(model => model.Apellido)
             </dt>
-            <dd class = "col-sm-10">
+            <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.Apellido)
             </dd>
-            <dt class = "col-sm-2">
+        </div>
+        <div class="row">
+            <dt class="col-sm-6 pl-350">
                 @Html.DisplayNameFor(model => model.GrupoFamiliar)
             </dt>
-            <dd class = "col-sm-10">
+            <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.GrupoFamiliar.Nombre)
             </dd>
-            <div class="d-flex justify-content-between mt-40">
-                <form asp-action="Delete">
-                    <input type="hidden" asp-for="IdFamiliar" />
-                    <a asp-action="Index" class="btn btn-secondary mr-200">Volver a la lista</a>
-                    <input type="submit" value="Borrar" class="btn btn-danger ml-200" />
-                </form>
-            </div>      
         </div>
+            
+        <form asp-action="Delete">
+            <div class="d-flex justify-content-center mt-40">
+                <input type="hidden" asp-for="IdFamiliar" />
+                <a asp-action="Index" class="btn btn-secondary mr-200">Volver a la lista</a>
+                <input type="submit" value="Borrar" class="btn btn-danger ml-200" />
+            </div>
+        </form>
+                 
     </div>
 </div>
+
