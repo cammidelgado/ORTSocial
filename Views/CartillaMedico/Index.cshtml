@@ -4,43 +4,40 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Médicos en Cartillas</h1>
+<div class="d-flex flex-column">
+    <div class="text-center">
+        <h1 class="">Médicos en Cartillas</h1>
+    </div>
+</div>
 
-<p>
-    @*<a asp-action="Create">Create New</a>*@
-</p>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Cartilla)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Medico.Especialidad)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Medico)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cartilla.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Medico.Especialidad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Medico.Nombre) 
-            </td>
-            <td>
-               @* <a asp-action="Edit" asp-route-id="@item.idCartillaMedico">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.idCartillaMedico">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.idCartillaMedico">Delete</a>*@
-            </td>
-        </tr>
+<div class="container mt-4">
+    <div id="medicosCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            @foreach (var item in Model)
+            {
+                <div class="carousel-item @(item == Model.First() ? "active" : "") text-center">
+                    <h5><strong>@Html.DisplayNameFor(model => model.Cartilla)</strong>    @Html.DisplayFor(modelItem => item.Cartilla.Nombre)</h5>
+                    <p><strong>@Html.DisplayNameFor(model => model.Medico.Nombre)</strong>    @Html.DisplayFor(modelItem => item.Medico.Nombre)</p>
+                    <p><strong>@Html.DisplayNameFor(model => model.Medico.Especialidad)</strong>    @Html.DisplayFor(modelItem => item.Medico.Especialidad)</p>
+                </div>
+            }
+        </div>
+
+        <button class="carousel-control-prev" role="button" data-bs-target="#medicosCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(172deg) brightness(107%) contrast(103%);"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#medicosCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true" style="filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(172deg) brightness(107%) contrast(103%);"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        var medicosCarousel = new bootstrap.Carousel(document.getElementById('medicosCarousel'), {
+            interval: 7000
+        });
+    </script>
 }
-    </tbody>
-</table>
