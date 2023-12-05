@@ -17,11 +17,11 @@
     @foreach (var item in Model)
     {
         <div class="col-md-4">
-            <div class="card">
+            <div class="card bg-light mb-3 border-dark">
                 <div class="card-header">
                     @Html.DisplayFor(modelItem => item.Nombre)
                 </div>
-                <div class="card-body">
+                <div class="card-body text-dark">
                     <p>
                         <span class="label">@Html.DisplayNameFor(model => model.Costo)</span>
                     $@Html.DisplayFor(modelItem => item.Costo)</p>
