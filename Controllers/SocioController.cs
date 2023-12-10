@@ -63,8 +63,6 @@ namespace ORTSocial.Controllers
         {
             var grupoFamiliar1 = await _context.GruposFamiliares.FindAsync(socio.IdGrupoFamiliar);
             var plan = await _context.Planes.FindAsync(socio.IdPlan);
-           // Plan plan = await _context.Planes.FirstOrDefaultAsync(p => p.IdPlan == socio.IdPlan);
-            //GrupoFamiliar grupoFamiliar = await _context.GruposFamiliares.FirstOrDefaultAsync(g => g.IdGrupoFamiliar == socio.IdGrupoFamiliar);
             socio.Plan = plan;
             socio.GrupoFamiliar = grupoFamiliar1;
 

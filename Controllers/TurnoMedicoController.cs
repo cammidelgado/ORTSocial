@@ -46,11 +46,12 @@ namespace ORTSocial.Controllers
             return View(turnoMedico);
         }
 
-        // GET: TurnoMedico/Create
         private async Task<Medico> GetMedico(int idMedico)
         { 
             return await _context.Medicos.FirstOrDefaultAsync(m => m.IdMedico == idMedico);
         }
+
+        // GET: TurnoMedico/Create
         public IActionResult Create()
         {
           // ViewData["IdMedico"] = new SelectList(_context.Medicos, "IdMedico", "Especialidad");
@@ -65,11 +66,7 @@ namespace ORTSocial.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("idTurno,Fecha,IdMedico,IdSocio")] TurnoMedico turnoMedico)
         {
-            /* Medico medico = await GetMedico(turnoMedico.IdMedico);
-             turnoMedico.Medico = medico;
-             Socio socio = await _context.Socios.FirstOrDefaultAsync(m => m.IdSocio == turnoMedico.IdSocio);
-             turnoMedico.Socio = socio;*/
-
+           
            // if (ModelState.IsValid)
            //{
                 _context.Add(turnoMedico);
@@ -118,8 +115,6 @@ namespace ORTSocial.Controllers
             {
                 return NotFound();
             }
-            // ViewData["IdMedico"] = new SelectList(_context.Medicos, "IdMedico", "Especialidad", turnoMedico.IdMedico);
-            // ViewData["IdSocio"] = new SelectList(_context.Socios, "IdSocio", "Dni", turnoMedico.IdSocio);
 
             var socio = await _context.Socios.Include(s => s.Plan).FirstOrDefaultAsync(s => s.IdSocio == turnoMedico.IdSocio);
             var cartillaId = socio.Plan.IdCartilla;
